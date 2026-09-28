@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dandiya Nights · Bhadrak
 
-## Getting Started
+Scroll-driven event site for Dandiya Nights, Durga Puja 2026 (17–19 Oct), Bhadrak. Title sponsor: Burlamart.
 
-First, run the development server:
+Next.js 16 · Tailwind CSS 4 · framer-motion · Lenis smooth scroll · hand-drawn canvas animation.
+
+## Run
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing event details
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Everything (venue, prices, Burlamart link, phone/WhatsApp, nights, sponsors, FAQ) lives in `lib/event.ts`.
+Add sponsors to `sponsors.partners` — empty slots show "Your brand here" until filled.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How the scenes work
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `components/DanceScene.tsx` — pinned hero. Scroll position is mapped to dance beats, so scrolling
+  scrubs the dancer like a video (32 beats, a twirl every 8). Copy "chapters" fade in over her.
+- `components/VenueScene.tsx` — pinned venue. A ring of dandiya pairs circles the garbo lamp under a
+  pandal; the three nights slide across as you scroll.
+- `lib/rig.ts` — the dancer: a small 3D skeleton (IK arms/legs, spin, skirt flare, dupatta) drawn on
+  canvas. `garbaPose` / `dandiyaPose` are the choreography; `RING_LOOKS` / `HERO_LOOK` the outfits.
+- `lib/fx.ts` — fairy lights, petals, stars, beams.
+- `lib/useSectionProgress.ts` — 0→1 progress for a pinned section.
+# DandiyaNights
